@@ -1,3 +1,10 @@
+import Clases.Llibre;
+import Clases.Usuari;
+import Clases.Biblioteca;
+import Clases.GestorBiblioteca;
+import Clases.Prestec;
+
+
 public class main {
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca();
@@ -7,6 +14,9 @@ public class main {
         biblioteca.afegirLlibre(llibre2);
         Usuari usuari = new Usuari("Carla");
         GestorBiblioteca gestor = new GestorBiblioteca();
+        
         gestor.prestarLlibre(usuari, llibre1);
+
     }
+
 }

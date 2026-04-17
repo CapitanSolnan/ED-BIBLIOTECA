@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class biblioteca {
+public class Biblioteca {
     private List<Llibre> llibres;
     public Biblioteca() {
         this.llibres = new ArrayList<>();

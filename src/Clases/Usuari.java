@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class usuari {
+public class Usuari {
     private String nom;
     private List<Llibre> llibresPrestats;
 
