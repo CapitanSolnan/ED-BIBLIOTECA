@@ -1,5 +1,9 @@
 import java.time.LocalDate;
 
+//prestec se crea con usuari, llibre y la data del prestec
+// la data de retorn son 2 semanes més tard de la data del prestec
+
+
 public class Prestec {
     private Usuari usuari;
     private Llibre llibre;

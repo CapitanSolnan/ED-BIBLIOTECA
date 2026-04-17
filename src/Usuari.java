@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
+// usuari se crea con el nom
+// llibresPrestats utiliza una arraylist al empezar
 
-public class usuari {
+//se puede añadir con afegirLlibre(llibre) y retornarLlibre(llibre)
+public class Usuari {
     private String nom;
     private List<Llibre> llibresPrestats;
 

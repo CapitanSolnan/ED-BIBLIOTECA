@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//GestorBiblioteca se inicia con una array de los prestados
+// se asigna a un usuario y a un llibre  con la funcion prestarLlibre(usuari, llibre)
+
 public class GestorBiblioteca {
     private List<Prestec> prestecs;
 

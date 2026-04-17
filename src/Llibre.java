@@ -1,4 +1,8 @@
-public class llibre {
+// titol se crea con un titulo y un autor
+// el prestat es en false al empezar
+// se canvia el prestat con las funciones prestar() y retornar()
+
+public class Llibre {
     private String titol;
     private String autor;
     private boolean prestat;
@@ -25,6 +29,7 @@ public class llibre {
     }
 
     @Override
+    //toString retorna el titulo, el autor y luego si prestat es true dice en presetec y en false disponible
     public String toString() {
         return titol + " de " + autor + (prestat ? " (En préstec)" : " (Disponible)");
     }

@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class biblioteca {
+//biblioteca inicia con una array de los libros
+// se añaden libros con afegirLlibre(llibre)
+// se puede ver que libro hay con buscarLlibre
+
+public class Biblioteca {
     private List<Llibre> llibres;
     public Biblioteca() {
         this.llibres = new ArrayList<>();
