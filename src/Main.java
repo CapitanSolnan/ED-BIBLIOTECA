@@ -1,4 +1,3 @@
-import java.io.Console;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +11,6 @@ public class Main {
         biblioteca.afegirLlibre(llibre1);
         biblioteca.afegirLlibre(llibre2);
         Usuari usuari = new Usuari("Carla");
-        
 
         GestorBiblioteca gestor = new GestorBiblioteca();
 
@@ -21,16 +19,16 @@ public class Main {
         gestor.prestarLlibre(usuari, llibre1);
 
         
-        menu(teclado, usuari);
+        menu(teclado, usuari, biblioteca);
 
         teclado.close();
     }
 
-public static void menu(Scanner teclado, Usuari usuari) {
+public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
     boolean activado = true;
     while (activado) {
-        ConsoleUtils.saltarPagina("Que vols fer?");
-        System.out.println("A. Consultar el hisrorial");
+        ConsoleUtils.saltarPagina("--Que vols fer?--");
+        System.out.println("A. Consultar el historial");
         System.out.println("B. Consultat disponibiliat del Llibre");
         System.out.println("C. Gestionar les categories");
         System.out.println("D. Consultar les estadistiques");
@@ -40,7 +38,7 @@ public static void menu(Scanner teclado, Usuari usuari) {
         teclado.nextLine();
         switch (opcio) {
             case 'a' -> consultarHistorial(teclado);
-            case 'b' -> disponibilitatLlibre(teclado, usuari);
+            case 'b' -> disponibilitatLlibre(teclado, usuari, biblioteca);
             case 'c' -> gestionarCategoria(teclado);
             case 'd' -> gestionarEstadistiques(teclado);
             case 'q' -> activado = false;
@@ -54,13 +52,36 @@ public static void menu(Scanner teclado, Usuari usuari) {
 }
 
 public static void consultarHistorial(Scanner teclado) {
+    ConsoleUtils.saltarPagina();
 
+    ConsoleUtils.dormirSegons(3);
 }
 
-public static void disponibilitatLlibre(Scanner teclado, Usuari usuari) {
+public static void disponibilitatLlibre(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
     ConsoleUtils.saltarPagina();
-    usuari.disponibilitatLlibre();
-    ConsoleUtils.dormirSegons(3);
+    System.out.println("Que llibre vols buscar?");
+    String titol = teclado.nextLine();
+    if (titol.isEmpty()) {
+        usuari.disponibilitatLlibre();
+        ConsoleUtils.dormirSegons(3);
+
+    } else {
+        Llibre llibre = biblioteca.buscarLlibre(titol);
+
+        if (llibre != null) {
+            if (llibre.esPrestat()) {
+                System.out.println("Llibre trobat: " + llibre.getTitol() + " (En préstec)");
+
+            }else{
+                System.out.println("Llibre trobat: " + llibre.getTitol() + " (Disponible)");
+            }
+        } else {
+            System.out.println("No s'ha trobat cap llibre amb aquest títol.");
+        }
+        ConsoleUtils.dormirSegons(1.5);
+
+    }
+
 }
 
 // Hay que crear la categoria dentro del llibre

@@ -21,4 +21,8 @@ public class Prestec {
     public LocalDate getDataRetorn() { 
         return dataRetorn; 
     }
+    public LocalDate getDataPrestec() { 
+        return dataPrestec; 
+    }
+
 }
