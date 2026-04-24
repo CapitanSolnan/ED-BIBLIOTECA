@@ -22,4 +22,5 @@ public class GestorBiblioteca {
             System.out.println("Aquest llibre ja està prestat.");
         }
     }
+
 }

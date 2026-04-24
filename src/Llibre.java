@@ -1,7 +1,3 @@
-// titol se crea con un titulo y un autor
-// el prestat es en false al empezar
-// se canvia el prestat con las funciones prestar() y retornar()
-
 public class Llibre {
     private String titol;
     private String autor;

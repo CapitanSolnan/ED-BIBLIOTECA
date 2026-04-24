@@ -3,7 +3,6 @@ import java.util.List;
 // usuari se crea con el nom
 // llibresPrestats utiliza una arraylist al empezar
 
-//se puede añadir con afegirLlibre(llibre) y retornarLlibre(llibre)
 public class Usuari {
     private String nom;
     private List<Llibre> llibresPrestats;
@@ -23,5 +22,28 @@ public class Usuari {
     }
     public void retornarLlibre(Llibre llibre) { 
         llibresPrestats.remove(llibre); 
+    }
+
+    public void disponibilitatLlibre(){
+
+        System.out.println("--- Llibres Disponibles ---");
+        for (Llibre llibre : llibresPrestats) {
+            if (!llibre.esPrestat()) {
+                System.out.println(llibre);
+
+            }else{
+                System.out.println("No hi ha llibres disponibles");
+            }
+        }
+        System.out.println("--- Llibres Prestats ---");
+
+        for (Llibre llibre : llibresPrestats) {
+            if (llibre.esPrestat()) {
+                System.out.println(llibre);
+
+            }else{
+                System.out.println("No hi ha llibres prestats");
+            }
+        }
     }
 }
