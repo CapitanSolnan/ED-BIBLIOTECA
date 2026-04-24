@@ -1,3 +1,4 @@
-public class usuari {
-    
+
+public class Usuari {
+        
 }
