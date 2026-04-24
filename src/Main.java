@@ -10,22 +10,93 @@ public class Main {
         Llibre llibre2 = new Llibre("El petit príncep", "Antoine de Saint-Exupéry");
         biblioteca.afegirLlibre(llibre1);
         biblioteca.afegirLlibre(llibre2);
-        Usuari usuari = new Usuari("Carla");
-        biblioteca.afegirUsuari(usuari);
 
         GestorBiblioteca gestor = new GestorBiblioteca();
 
-
-        gestor.prestarLlibre(usuari, llibre2);
-        gestor.prestarLlibre(usuari, llibre1);
-
         
-        menu(teclado, usuari, biblioteca);
+        menuPrincipal(teclado, biblioteca);
+
+
 
         teclado.close();
     }
+public static void menuPrincipal(Scanner teclado, Biblioteca biblioteca){
 
-public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
+    boolean activado = true;
+    while (activado) {
+        ConsoleUtils.saltarPagina("--Que vols fer?--");
+        System.out.println("A. Menu Llibre");
+        System.out.println("B. Menu Usuari");
+        System.out.println("C. Menu Consulta");
+        System.out.println("Q. SORTIR");
+
+        char opcio = teclado.next().toLowerCase().charAt(0);
+        teclado.nextLine();
+        switch (opcio) {
+            case 'a' -> menuLlibre(teclado, biblioteca);
+            case 'b' -> menuUsuari(teclado, biblioteca);
+            case 'c' -> menuConsulta(teclado, biblioteca);
+            case 'q' -> activado = false;
+            default -> {
+                        System.out.println("Opcio erronia");
+                        ConsoleUtils.dormirSegons(1.5);
+                    }
+        }
+    }
+}
+
+public static void menuUsuari(Scanner teclado, Biblioteca biblioteca){
+    boolean activado = true;
+    while (activado) {
+        ConsoleUtils.saltarPagina("--- MENU USUARI ---");
+        System.out.println("A. Creació Usuari");
+        System.out.println("B. Modificació Usuari");
+        System.out.println("C. Eliminació Usuari");
+        System.out.println("Q. TORNAR");
+
+        char opcio = teclado.next().toLowerCase().charAt(0);
+        teclado.nextLine();
+        switch (opcio) {
+            case 'a' -> biblioteca.creadorUsuari(teclado);
+            case 'b' -> biblioteca.modificacioUsuari(teclado);
+            case 'c' -> biblioteca.eliminacioUsuari(teclado);
+
+            case 'q' -> activado = false;
+            default -> {
+                        System.out.println("Opcio erronia");
+                        ConsoleUtils.dormirSegons(1.5);
+                    }
+        }
+    }
+}
+
+
+public static void menuLlibre(Scanner teclado, Biblioteca biblioteca){
+    boolean activado = true;
+    while (activado) {
+        ConsoleUtils.saltarPagina("--- MENU LLIBRE ---");
+        System.out.println("A. Creació de Llibre");
+        System.out.println("B. Modificació de Llibre");
+        System.out.println("C. Eliminació de Llibre");
+        System.out.println("Q. TORNAR");
+
+        char opcio = teclado.next().toLowerCase().charAt(0);
+        teclado.nextLine();
+        switch (opcio) {
+         //   case 'a' -> biblioteca.creadorLlibre(teclado);
+         //   case 'b' -> biblioteca.modificacioLlibre(teclado);
+         //   case 'c' -> biblioteca.eliminacioLlibre(teclado);
+
+            case 'q' -> activado = false;
+            default -> {
+                        System.out.println("Opcio erronia");
+                        ConsoleUtils.dormirSegons(1.5);
+                    }
+        }
+    }
+}
+
+public static void menuConsulta(Scanner teclado, Biblioteca biblioteca) {
     boolean activado = true;
     while (activado) {
         ConsoleUtils.saltarPagina("--Que vols fer?--");
@@ -33,13 +104,13 @@ public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
         System.out.println("B. Consultat disponibiliat del Llibre");
         System.out.println("C. Gestionar les categories");
         System.out.println("D. Consultar les estadistiques");
-        System.out.println("Q. SORTIR");
+        System.out.println("Q. TORNAR");
 
         char opcio = teclado.next().toLowerCase().charAt(0);
         teclado.nextLine();
         switch (opcio) {
             case 'a' -> consultarHistorial(teclado, biblioteca);
-            case 'b' -> disponibilitatLlibre(teclado, usuari, biblioteca);
+            case 'b' -> disponibilitatLlibre(teclado, biblioteca);
             case 'c' -> gestionarCategoria(teclado);
             case 'd' -> gestionarEstadistiques(teclado);
             case 'q' -> activado = false;
@@ -51,6 +122,10 @@ public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
     }
 
 }
+
+
+/*------------------------------------------------------------ */
+
 
 public static void consultarHistorial(Scanner teclado, Biblioteca biblioteca) {
       ConsoleUtils.saltarPagina();
@@ -65,7 +140,7 @@ public static void consultarHistorial(Scanner teclado, Biblioteca biblioteca) {
                 
                 System.out.println("--- Usuari " + usuari.getNom() + " --- ");
                 
-                
+
                 ConsoleUtils.dormirSegons(1.5);
 
 
@@ -78,12 +153,13 @@ public static void consultarHistorial(Scanner teclado, Biblioteca biblioteca) {
 
 }
 
-public static void disponibilitatLlibre(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
+public static void disponibilitatLlibre(Scanner teclado, Biblioteca biblioteca) {
     ConsoleUtils.saltarPagina();
     System.out.println("Que llibre vols buscar?");
     String titol = teclado.nextLine();
+
     if (titol.isEmpty()) {
-        usuari.disponibilitatLlibre();
+        biblioteca.mostrarDisponibilitat();
         ConsoleUtils.dormirSegons(3);
 
     } else {
@@ -92,17 +168,15 @@ public static void disponibilitatLlibre(Scanner teclado, Usuari usuari, Bibliote
         if (llibre != null) {
             if (llibre.esPrestat()) {
                 System.out.println("Llibre trobat: " + llibre.getTitol() + " (En préstec)");
-
-            }else{
+            } else {
                 System.out.println("Llibre trobat: " + llibre.getTitol() + " (Disponible)");
             }
         } else {
             System.out.println("No s'ha trobat cap llibre amb aquest títol.");
         }
+
         ConsoleUtils.dormirSegons(1.5);
-
     }
-
 }
 
 // Hay que crear la categoria dentro del llibre

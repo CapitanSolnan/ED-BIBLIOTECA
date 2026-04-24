@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Usuari {
     private String nom;
@@ -12,6 +13,10 @@ public class Usuari {
     public String getNom() { 
         return nom; 
     }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    
     public List<Llibre> getLlibresPrestats() { 
         return llibresPrestats; 
     }
@@ -22,26 +27,5 @@ public class Usuari {
         llibresPrestats.remove(llibre); 
     }
 
-    public void disponibilitatLlibre(){
 
-        System.out.println("--- Llibres Disponibles ---");
-        for (Llibre llibre : llibresPrestats) {
-            if (!llibre.esPrestat()) {
-                System.out.println(llibre);
-
-            }else{
-                System.out.println("No hi ha llibres disponibles");
-            }
-        }
-        System.out.println("--- Llibres Prestats ---");
-
-        for (Llibre llibre : llibresPrestats) {
-            if (llibre.esPrestat()) {
-                System.out.println(llibre);
-
-            }else{
-                System.out.println("No hi ha llibres prestats");
-            }
-        }
-    }
 }
