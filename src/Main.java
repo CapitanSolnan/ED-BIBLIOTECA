@@ -11,6 +11,7 @@ public class Main {
         biblioteca.afegirLlibre(llibre1);
         biblioteca.afegirLlibre(llibre2);
         Usuari usuari = new Usuari("Carla");
+        biblioteca.afegirUsuari(usuari);
 
         GestorBiblioteca gestor = new GestorBiblioteca();
 
@@ -52,7 +53,29 @@ public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
 }
 
 public static void consultarHistorial(Scanner teclado, Biblioteca biblioteca) {
-  
+      ConsoleUtils.saltarPagina();
+        System.out.println("Que usuari vols buscar?");
+        String nom = teclado.nextLine();
+        if(nom.isEmpty()){
+            System.out.println("No has seleccionat cap usuari");
+            ConsoleUtils.dormirSegons(1.5);
+        }else{
+            Usuari usuari = biblioteca.buscarUsuari(nom);
+            if (usuari != null) {
+                
+                System.out.println("--- Usuari " + usuari.getNom() + " --- ");
+                
+                
+                ConsoleUtils.dormirSegons(1.5);
+
+
+            }else{
+                System.out.println("No s'ha trobat cap usuari amb aquest nom.");
+                ConsoleUtils.dormirSegons(1.5);
+
+            }
+        }
+
 }
 
 public static void disponibilitatLlibre(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {

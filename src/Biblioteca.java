@@ -7,6 +7,8 @@ public class Biblioteca {
     
     public Biblioteca() {
         this.llibres = new ArrayList<>();
+        this.usuaris = new ArrayList<>();
+
     }
     public void afegirLlibre(Llibre llibre) { 
         llibres.add(llibre); 
@@ -22,6 +24,12 @@ public class Biblioteca {
     public List<Llibre> getLlibres() { 
         return llibres; 
     }
+
+    
+    public void afegirUsuari(Usuari usuari) { 
+        usuaris.add(usuari); 
+    }
+
     public Usuari buscarUsuari(String nom) {
         for (Usuari usuari : usuaris) {
         if (usuari.getNom().equalsIgnoreCase(nom)) {
@@ -29,5 +37,8 @@ public class Biblioteca {
         }
     }
     return null;
+    }
+    public List<Usuari> getUsuaris() {
+        return usuaris;
     }
 }
