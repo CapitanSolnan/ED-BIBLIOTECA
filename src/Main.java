@@ -1,3 +1,5 @@
-public class main {
-    //hols
+public class Main {
+    public static void main(String[] args) {
+        
+    }
 }
