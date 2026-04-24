@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Biblioteca {
     private List<Llibre> llibres;
@@ -29,5 +30,30 @@ public class Biblioteca {
         }
     }
     return null;
+    }
+
+    public void crearLlibre(Scanner teclat) {
+        String titol = "";
+        String autor = "";
+        String categoria = "";
+
+        System.out.println("Escriu el títol del llibre: ");
+        if (titol != "") {
+            titol = teclat.nextLine().trim();
+        }
+        
+        System.out.println("Escriu el nom de l'autor: ");
+        if (autor != "") {
+            autor = teclat.nextLine().trim();
+        }
+
+        System.out.println("Escriu la categoria del llibre: ");
+        if (cateogira != "") {
+            categoria = teclat.nextLine().trim();
+        }
+
+        Llibre nouLlibre = new Llibre(titol, autor, categoria);
+
+        getLlibres().add(nouLlibre);
     }
 }

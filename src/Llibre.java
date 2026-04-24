@@ -1,12 +1,18 @@
+import java.util.Scanner;
+
 public class Llibre {
     private String titol;
     private String autor;
     private boolean prestat;
+    private String categoria;
 
-    public Llibre(String titol, String autor) {
+    public Llibre(String titol, String autor, String categoria) {
         this.titol = titol;
         this.autor = autor;
         this.prestat = false;
+        if (categoria == "Novel·la" || categoria == "Ciència" || categoria == "Història") {
+            this.categoria = categoria;
+        }  
     }
     public String getTitol() { 
         return titol; 
@@ -29,4 +35,6 @@ public class Llibre {
     public String toString() {
         return titol + " de " + autor + (prestat ? " (En préstec)" : " (Disponible)");
     }
+
+    
 }
