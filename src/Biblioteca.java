@@ -3,6 +3,8 @@ import java.util.List;
 
 public class Biblioteca {
     private List<Llibre> llibres;
+    private List<Usuari> usuaris;
+    
     public Biblioteca() {
         this.llibres = new ArrayList<>();
     }
@@ -19,5 +21,13 @@ public class Biblioteca {
     }
     public List<Llibre> getLlibres() { 
         return llibres; 
+    }
+    public Usuari buscarUsuari(String nom) {
+        for (Usuari usuari : usuaris) {
+        if (usuari.getNom().equalsIgnoreCase(nom)) {
+            return usuari;
+        }
+    }
+    return null;
     }
 }

@@ -37,7 +37,7 @@ public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
         char opcio = teclado.next().toLowerCase().charAt(0);
         teclado.nextLine();
         switch (opcio) {
-            case 'a' -> consultarHistorial(teclado);
+            case 'a' -> consultarHistorial(teclado, biblioteca);
             case 'b' -> disponibilitatLlibre(teclado, usuari, biblioteca);
             case 'c' -> gestionarCategoria(teclado);
             case 'd' -> gestionarEstadistiques(teclado);
@@ -51,10 +51,8 @@ public static void menu(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
 
 }
 
-public static void consultarHistorial(Scanner teclado) {
-    ConsoleUtils.saltarPagina();
-
-    ConsoleUtils.dormirSegons(3);
+public static void consultarHistorial(Scanner teclado, Biblioteca biblioteca) {
+  
 }
 
 public static void disponibilitatLlibre(Scanner teclado, Usuari usuari, Biblioteca biblioteca) {
