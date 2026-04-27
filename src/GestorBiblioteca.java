@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Colors;
+
 //GestorBiblioteca se inicia con una array de los prestados
 // se asigna a un usuario y a un llibre  con la funcion prestarLlibre(usuari, llibre)
 
@@ -17,9 +19,9 @@ public class GestorBiblioteca {
             Prestec prestec = new Prestec(usuari, llibre, LocalDate.now());
             prestecs.add(prestec);
             usuari.afegirLlibre(llibre);
-            System.out.println(usuari.getNom() + " ha agafat el llibre: " + llibre.getTitol());
+            System.out.println(Colors.BLANC + usuari.getNom() + " ha agafat el llibre: " + llibre.getTitol() + Colors.RESET);
         } else {
-            System.out.println("Aquest llibre ja està prestat.");
+            System.out.println(Colors.VERMELL + "Aquest llibre ja està prestat." + Colors.RESET);
         }
     }
 

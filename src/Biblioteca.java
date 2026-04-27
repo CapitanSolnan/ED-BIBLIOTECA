@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import utils.ConsoleUtils;
+
 public class Biblioteca {
     private List<Llibre> llibres;
     private List<Usuari> usuaris;

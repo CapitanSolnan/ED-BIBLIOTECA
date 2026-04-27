@@ -1,3 +1,4 @@
+package utils;
 public class ConsoleUtils {
     
     public static void saltarPagina() {
@@ -14,7 +15,7 @@ public class ConsoleUtils {
 		// }
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-		System.out.println(titol);
+		System.out.println(Estils.TITOL + titol + Colors.RESET);
 	}
 
 	public static void dormirSegons(double segons) {

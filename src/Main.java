@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import utils.Colors;
+import utils.Estils;
+import utils.ConsoleUtils;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,10 +24,12 @@ public class Main {
             System.out.println(" B. Menu Usuari");
             System.out.println(" C. Menu Consulta");
             System.out.println(" D. Menu Prèstec");
-            System.out.println(" Q. SORTIR");
+            System.out.println(Colors.VERMELL+ " Q. SORTIR" + Colors.RESET);
 
+            System.out.print(Estils.RESPOSTA);
             char opcio = teclado.next().toLowerCase().charAt(0);
             teclado.nextLine();
+            System.out.print(Colors.RESET);
             switch (opcio) {
                 case 'a' -> menuLlibre(teclado, biblioteca);
                 case 'b' -> menuUsuari(teclado, biblioteca);
@@ -32,7 +37,7 @@ public class Main {
                 case 'd' -> menuGestor(teclado, biblioteca, gestor);
                 case 'q' -> activado = false;
                 default -> {
-                    System.out.println("Opcio erronia");
+                    System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
                     ConsoleUtils.dormirSegons(1.5);
                 }
             }
@@ -61,7 +66,7 @@ public class Main {
 
                 case 'q' -> activado = false;
                 default -> {
-                    System.out.println("Opcio erronia");
+                    System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
                     ConsoleUtils.dormirSegons(1.5);
                 }
             }
@@ -86,7 +91,7 @@ public class Main {
 
                 case 'q' -> activado = false;
                 default -> {
-                    System.out.println("Opcio erronia");
+                    System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
                     ConsoleUtils.dormirSegons(1.5);
                 }
             }
@@ -112,7 +117,7 @@ public class Main {
                 case 'd' -> gestionarEstadistiques(teclado);
                 case 'q' -> activado = false;
                 default -> {
-                    System.out.println("Opcio erronia");
+                    System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
                     ConsoleUtils.dormirSegons(1.5);
                 }
             }
@@ -135,7 +140,7 @@ public class Main {
                 case 'b' -> menuStoc(teclado, biblioteca);
                 case 'q' -> activado = false;
                 default -> {
-                    System.out.println("Opcio erronia");
+                    System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
                     ConsoleUtils.dormirSegons(1.5);
                 }
             }
@@ -151,14 +156,14 @@ public class Main {
 
     public static void menuPrestec(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor){
          ConsoleUtils.saltarPagina("--- MENU PRÈSTEC ---");
-        System.out.println("Quin usuari vol fer el prèstec?");
+        System.out.println(Estils.PREGUNTA + "Quin usuari vol fer el prèstec?" +Colors.RESET);
         String nom = teclado.nextLine();
 
-        System.out.println("Quin llibre es?");
+        System.out.println(Estils.PREGUNTA + "Quin llibre es?" + Colors.RESET);
         String titol = teclado.nextLine();
 
         if (nom.isEmpty() || titol.isEmpty()) {
-            System.out.println("Usuari o titol incorrecte");
+            System.out.println(Colors.VERMELL + "Usuari o titol incorrecte" + Colors.RESET);
             ConsoleUtils.dormirSegons(1.5);
         } else {
             Usuari usuari = biblioteca.buscarUsuari(nom);
@@ -167,11 +172,11 @@ public class Main {
             if (usuari != null && llibre != null) {
 
                 gestor.prestarLlibre(usuari, llibre);
-                System.out.println("L'usuari " + nom + " te en prèstec el llibre " + titol);
+                System.out.println(Colors.VERD + "L'usuari " + nom + " te en prèstec el llibre " + titol + Colors.RESET);
                 ConsoleUtils.dormirSegons(1.5);
 
             } else {
-                System.out.println("Usuari o titol incorrecte");
+                System.out.println(Colors.VERMELL + "Usuari o titol incorrecte" +Colors.RESET);
                 ConsoleUtils.dormirSegons(1.5);
             }
 
@@ -181,22 +186,21 @@ public class Main {
 
     public static void consultarHistorial(Scanner teclado, Biblioteca biblioteca) {
         ConsoleUtils.saltarPagina();
-        System.out.println("Que usuari vols buscar?");
+        System.out.println(Estils.PREGUNTA + "Que usuari vols buscar?" + Colors.RESET);
         String nom = teclado.nextLine();
         if (nom.isEmpty()) {
-            System.out.println("No has seleccionat cap usuari");
+            System.out.println(Colors.VERMELL + "No has seleccionat cap usuari" + Colors.RESET);
             ConsoleUtils.dormirSegons(1.5);
         } else {
             Usuari usuari = biblioteca.buscarUsuari(nom);
             if (usuari != null) {
 
-                System.out.println("--- Usuari " + usuari.getNom() + " --- ");
-                
-
+                System.out.println(Estils.NEGRETA + "--- Usuari " + usuari.getNom() + " --- " + Colors.RESET);
+            
                 ConsoleUtils.dormirSegons(1.5);
 
             } else {
-                System.out.println("No s'ha trobat cap usuari amb aquest nom.");
+                System.out.println(Colors.VERMELL +"No s'ha trobat cap usuari amb aquest nom." + Colors.RESET);
                 ConsoleUtils.dormirSegons(1.5);
 
             }
@@ -206,13 +210,13 @@ public class Main {
 
     public static void disponibilitatLlibre(Scanner teclado, Biblioteca biblioteca) {
         ConsoleUtils.saltarPagina();
-        System.out.println("Que llibre vols buscar?");
+        System.out.println(Estils.PREGUNTA + "Que llibre vols buscar?" + Colors.RESET);
         String titol = teclado.nextLine();
 
         if (titol.isEmpty()) {
             biblioteca.mostrarDisponibilitat();
              System.out.println();
-            System.out.println("Prem ENTER per TORNAR");
+            System.out.println(Colors.GRIS + "Prem ENTER per TORNAR" + Colors.RESET);
             teclado.nextLine();
 
         } else {
@@ -225,7 +229,7 @@ public class Main {
                     System.out.println("Llibre trobat: " + llibre.getTitol() + " (Disponible)");
                 }
             } else {
-                System.out.println("No s'ha trobat cap llibre amb aquest títol.");
+                System.out.println(Colors.VERMELL + "No s'ha trobat cap llibre amb aquest títol." + Colors.RESET);
             }
 
             ConsoleUtils.dormirSegons(1.5);

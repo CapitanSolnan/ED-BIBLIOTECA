@@ -1,3 +1,5 @@
+import utils.Colors;
+
 public class Llibre {
     private String titol;
     private String autor;
@@ -35,6 +37,6 @@ public class Llibre {
     @Override
     //toString retorna el titulo, el autor y luego si prestat es true dice en presetec y en false disponible
     public String toString() {
-        return titol + " de " + autor + (prestat ? " (En préstec)" : " (Disponible)");
+        return titol + " de " + autor + (prestat ? Colors.GROC+" (En préstec)" + Colors.RESET : Colors.VERD +" (Disponible)" + Colors.RESET);
     }
 }
