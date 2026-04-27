@@ -24,6 +24,14 @@ public class Llibre {
         prestat = false; 
     }
 
+    public void setTitol(String titol) {
+        this.titol = titol;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+    
     @Override
     //toString retorna el titulo, el autor y luego si prestat es true dice en presetec y en false disponible
     public String toString() {
