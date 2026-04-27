@@ -27,5 +27,9 @@ public class Usuari {
         llibresPrestats.remove(llibre); 
     }
 
+    @Override
+    public String toString() {
+        return "Nom: " + nom;
+    }
 
 }
