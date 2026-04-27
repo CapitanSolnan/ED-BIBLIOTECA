@@ -20,6 +20,7 @@ GestorBiblioteca
 ## Terminado
 Llibre
 - [x] Crear / Modificar / Eliminar llibre.
+
 Usuari
 - [x] Crear / Modificar / Eliminar usuari.
 - [x] Llistar usuaris.
