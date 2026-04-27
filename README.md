@@ -1,5 +1,7 @@
 "# ED-BIBLIOTECA" 
 
-Javier Caño \n
-Ariadna Pages \n
+Javier Caño 
+
+Ariadna Pages 
+
 Alejandro Batista
