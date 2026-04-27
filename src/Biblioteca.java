@@ -12,22 +12,8 @@ public class Biblioteca {
 
     }
 
-    public void afegirLlibre(Llibre llibre) {
-        llibres.add(llibre);
-    }
 
-    public Llibre buscarLlibre(String titol) {
-        for (Llibre llibre : llibres) {
-            if (llibre.getTitol().equalsIgnoreCase(titol)) {
-                return llibre;
-            }
-        }
-        return null;
-    }
-
-    public List<Llibre> getLlibres() {
-        return llibres;
-    }
+    /*FUNCIONES USUARI------------------------------------------------------ */
 
     public void afegirUsuari(Usuari usuari) {
         usuaris.add(usuari);
@@ -131,7 +117,28 @@ public class Biblioteca {
 
     }
 
-public void mostrarDisponibilitat() {
+
+
+    /*FUNCIONES LIBRO------------------------------------------------------ */
+
+    public void afegirLlibre(Llibre llibre) {
+        llibres.add(llibre);
+    }
+
+    public Llibre buscarLlibre(String titol) {
+        for (Llibre llibre : llibres) {
+            if (llibre.getTitol().equalsIgnoreCase(titol)) {
+                return llibre;
+            }
+        }
+        return null;
+    }
+
+    public List<Llibre> getLlibres() {
+        return llibres;
+    }
+
+    public void mostrarDisponibilitat() {
     boolean disponoble = false;
     boolean prestat = false;
 
@@ -158,6 +165,95 @@ public void mostrarDisponibilitat() {
     }
 }
 
-    
+    public boolean creadorLlibre(Scanner teclado) {
+
+        ConsoleUtils.saltarPagina("---CREACIÓ DE LLIBRE---");
+
+        System.out.print("Titol:");
+
+        String titol = teclado.nextLine();
+
+
+         System.out.print("Autor:");
+
+        String autor = teclado.nextLine();
+
+        if (titol.isEmpty()) {
+            return false;
+        } else {
+            Llibre comprovarLlibre = buscarLlibre(titol);
+            if (comprovarLlibre != null) {
+                System.out.println("Titol en us");
+                return false;
+            } else {
+                Llibre llibre = new Llibre(titol, autor);
+                afegirLlibre(llibre);
+                return true;
+            }
+        }
+
+    }
+
+    public boolean modificacioLlibre(Scanner teclado) {
+        ConsoleUtils.saltarPagina("---MODIFICAR DE LLIBRE---");
+
+        System.out.print("Nom Antic:");
+        String nomAntic = teclado.nextLine();
+
+        System.out.print("Nom Nou:");
+        String nomNou = teclado.nextLine();
+
+        if (nomAntic.isEmpty() || nomNou.isEmpty()) {
+                System.out.println("No s'ha trobat cap llibre amb aquest titol.");
+            ConsoleUtils.dormirSegons(1.5);
+            return false;
+        } else {
+
+            Usuari usuari = buscarUsuari(nomAntic);
+            if (usuari != null) {
+
+                usuari.setNom(nomNou);
+                ConsoleUtils.dormirSegons(1.5);
+                return true;
+
+            } else {
+                System.out.println("No s'ha trobat cap llibre amb aquest titol.");
+                ConsoleUtils.dormirSegons(1.5);
+                return false;
+            }
+
+        }
+
+    }
+
+    public boolean eliminacioLlibre(Scanner teclado) {
+        ConsoleUtils.saltarPagina("---ELIMINAR DE LLIBRE---");
+
+        System.out.print("Nom:");
+        String nom = teclado.nextLine();
+
+        if (nom.isEmpty()) {
+                System.out.println("No s'ha trobat cap llibre amb aquest titol.");
+            ConsoleUtils.dormirSegons(1.5);
+            return false;
+        } else {
+
+            Usuari usuari = buscarUsuari(nom);
+            if (usuari != null) {
+
+                usuaris.remove(usuari);
+                System.out.println("Usuari " + nom + " eliminat");
+                ConsoleUtils.dormirSegons(1.5);
+                return true;
+
+            } else {
+                System.out.println("No s'ha trobat cap llibre amb aquest titol.");
+                ConsoleUtils.dormirSegons(1.5);
+                return false;
+            }
+
+        }
+
+    }
 
 }
