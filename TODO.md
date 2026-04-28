@@ -18,8 +18,14 @@ GestorBiblioteca
 - [] Controlar l’estoc (si tenim més d’un llibre).
 
 ## Terminado
-Llibre
-- [x] Crear / Modificar / Eliminar llibre.
+
+--- ARI ---
+Llibre 
+- [X] Crear / Modificar / Eliminar llibre.
+
+
+
+--- JAVI ---
 
 Usuari
 - [x] Crear / Modificar / Eliminar usuari.
@@ -33,3 +39,7 @@ Biblioteca
 
 GestorBiblioteca
 - [x] Prestar llibre a un usuari.
+
+
+
+--- ALE ---
