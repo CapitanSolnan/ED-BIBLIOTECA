@@ -3,10 +3,6 @@
 ## Bugs
 
 ## Pendiente
-Prestec
-- [] Permetre gestionar els préstecs.
-- [] Controlar el màxim de llibres que es poden demanar.
-
 Main
 - [] Gestionar categories (ex. "Novel·la", "Història", "Ciència", etc.).
 - [] Gestionar estadístiquees (informes de llibres més prestats, lectors més actius, nombre total de préstecs per categoria...)
@@ -23,7 +19,9 @@ GestorBiblioteca
 
 Llibre 
 - [X] Crear / Modificar / Eliminar llibre.
-
+Prestec
+- [X] Permetre gestionar els préstecs.
+- [X] Controlar el màxim de llibres que es poden demanar.
 
 
 --- JAVI ---
