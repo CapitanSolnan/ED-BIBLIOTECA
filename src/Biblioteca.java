@@ -36,6 +36,7 @@ public class Biblioteca {
         String titol = "";
         String autor = "";
         String categoria = "";
+        int exemplars = 0;
 
         System.out.println("Escriu el títol del llibre: ");
         if (titol != "") {
@@ -52,7 +53,12 @@ public class Biblioteca {
             categoria = teclat.nextLine().trim();
         }
 
-        Llibre nouLlibre = new Llibre(titol, autor, categoria);
+        System.out.println("Quants exemplars hi ha?");
+        if (categoria != "") {
+            exemplars = teclat.nextInt();
+        }
+
+        Llibre nouLlibre = new Llibre(titol, autor, categoria, exemplars);
 
         getLlibres().add(nouLlibre);
     }

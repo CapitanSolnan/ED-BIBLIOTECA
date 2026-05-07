@@ -64,7 +64,7 @@ public static void disponibilitatLlibre(Scanner teclado, Usuari usuari, Bibliote
         Llibre llibre = biblioteca.buscarLlibre(titol);
 
         if (llibre != null) {
-            if (llibre.esPrestat()) {
+            if (llibre.hiHaExemplars()) {
                 System.out.println("Llibre trobat: " + llibre.getTitol() + " (En préstec)");
 
             }else{

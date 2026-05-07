@@ -20,7 +20,7 @@ public class Usuari {
     public String getNom() { 
         return nom; 
     }
-    public List<Llibre> getLlibresPrestats() { 
+    public List<Llibre> getllibresPrestats() { 
         return llibresPrestats; 
     }
     public void afegirLlibre(Llibre llibre) { 
@@ -34,7 +34,7 @@ public class Usuari {
 
         System.out.println("--- Llibres Disponibles ---");
         for (Llibre llibre : llibresPrestats) {
-            if (!llibre.esPrestat()) {
+            if (!llibre.hiHaExemplars()) {
                 System.out.println(llibre);
 
             }else{
@@ -44,7 +44,7 @@ public class Usuari {
         System.out.println("--- Llibres Prestats ---");
 
         for (Llibre llibre : llibresPrestats) {
-            if (llibre.esPrestat()) {
+            if (llibre.hiHaExemplars()) {
                 System.out.println(llibre);
 
             }else{

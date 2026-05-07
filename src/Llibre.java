@@ -3,38 +3,46 @@ import java.util.Scanner;
 public class Llibre {
     private String titol;
     private String autor;
-    private boolean prestat;
     private String categoria;
 
+    private int totalExemplars;
+    private int exemplarsDisponibles;
+
+    // ✔ Constructor antic (no es trenca res)
     public Llibre(String titol, String autor, String categoria) {
+        this(titol, autor, categoria, 1); // per defecte 1 exemplar
+    }
+
+    // ✔ Constructor nou amb estoc
+    public Llibre(String titol, String autor, String categoria, int totalExemplars) {
         this.titol = titol;
         this.autor = autor;
-        this.prestat = false;
-        if (categoria == "Novel·la" || categoria == "Ciència" || categoria == "Història") {
-            this.categoria = categoria;
-        }  
+        this.categoria = categoria;
+
+        this.totalExemplars = totalExemplars;
+        this.exemplarsDisponibles = totalExemplars;
     }
-    public String getTitol() { 
-        return titol; 
+
+    public boolean hiHaExemplars() {
+        return exemplarsDisponibles > 0;
     }
-    public String getAutor() { 
-        return autor; 
+
+    public void prestar() {
+        exemplarsDisponibles--;
     }
-    public boolean esPrestat() { 
-        return prestat; 
+
+    public void retornar() {
+        exemplarsDisponibles++;
     }
-    public void prestar() { 
-        prestat = true; 
-    }
-    public void retornar() { 
-        prestat = false; 
-    }
+    
+
+    public String getTitol() { return titol; }
+    public String getAutor() { return autor; }
 
     @Override
-    //toString retorna el titulo, el autor y luego si prestat es true dice en presetec y en false disponible
     public String toString() {
-        return titol + " de " + autor + (prestat ? " (En préstec)" : " (Disponible)");
+        return titol + " de " + autor +
+               " | Disponibles: " + exemplarsDisponibles +
+               "/" + totalExemplars;
     }
-
-    
 }
