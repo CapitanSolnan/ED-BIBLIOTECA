@@ -48,7 +48,7 @@ public class Biblioteca {
         }
 
         System.out.println("Escriu la categoria del llibre: ");
-        if (cateogira != "") {
+        if (categoria != "") {
             categoria = teclat.nextLine().trim();
         }
 

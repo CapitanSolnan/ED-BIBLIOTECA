@@ -12,15 +12,32 @@ public class GestorBiblioteca {
         this.prestecs = new ArrayList<>();
     }
     public void prestarLlibre(Usuari usuari, Llibre llibre) {
-        if (!llibre.esPrestat()) {
-            llibre.prestar();
-            Prestec prestec = new Prestec(usuari, llibre, LocalDate.now());
-            prestecs.add(prestec);
-            usuari.afegirLlibre(llibre);
-            System.out.println(usuari.getNom() + " ha agafat el llibre: " + llibre.getTitol());
-        } else {
-            System.out.println("Aquest llibre ja està prestat.");
-        }
+
+    if (!usuari.potAgafarMes()) {
+        System.out.println("Has arribat al màxim de llibres permesos.");
+        return;
     }
+
+    if (!llibre.esPrestat()) {
+        llibre.prestar();
+        Prestec prestec = new Prestec(usuari, llibre, LocalDate.now());
+        prestecs.add(prestec);
+        usuari.afegirLlibre(llibre);
+        System.out.println(usuari.getNom() + " ha agafat el llibre: " + llibre.getTitol());
+    } else {
+        System.out.println("Aquest llibre ja està prestat.");
+    }
+}
+
+    public void retornarLlibre(Usuari usuari, Llibre llibre) {
+    if (llibre.esPrestat()) {
+        llibre.retornar();
+        usuari.retornarLlibre(llibre);
+        System.out.println("Llibre retornat correctament.");
+    } else {
+        System.out.println("Aquest llibre no estava prestat.");
+    }
+}
+
 
 }

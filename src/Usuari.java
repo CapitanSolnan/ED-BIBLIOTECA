@@ -4,12 +4,18 @@ import java.util.List;
 // llibresPrestats utiliza una arraylist al empezar
 
 public class Usuari {
+    private static final int MAX_LLIBRES = 3;
     private String nom;
     private List<Llibre> llibresPrestats;
 
     public Usuari(String nom) {
         this.nom = nom;
         this.llibresPrestats = new ArrayList<>();
+    }
+
+    public boolean potAgafarMes() {
+        return llibresPrestats.size() < MAX_LLIBRES;
+        
     }
     public String getNom() { 
         return nom; 
