@@ -19,6 +19,7 @@ GestorBiblioteca
 
 Llibre 
 - [X] Crear / Modificar / Eliminar llibre.
+
 Prestec
 - [X] Permetre gestionar els préstecs.
 - [X] Controlar el màxim de llibres que es poden demanar.
