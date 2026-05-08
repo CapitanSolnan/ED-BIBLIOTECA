@@ -219,6 +219,49 @@ public class Biblioteca {
     
 }
 
+
+public void mostrarCategoria(String categoria) {
+
+
+    if (categoria.equals("todas")) {
+        
+        boolean comprovador = false;
+
+        ConsoleUtils.saltarPagina("--- Totes les categories ---");
+        for (Llibre llibre : llibres) {
+            System.out.println(" Categoria: " + llibre.getCategoria() + " ------>  " + llibre);
+            comprovador = true;
+        }
+
+
+        if (!comprovador) {
+            System.out.println("No hi ha llibres"); 
+
+        }
+
+
+    }else{
+        
+
+    boolean comprovador = false;
+
+    ConsoleUtils.saltarPagina("--- Llibres de la categoria " + categoria + " ---");
+    for (Llibre llibre : llibres) {
+
+        if (llibre.getCategoria().equalsIgnoreCase(categoria)) {
+            System.out.println(llibre);
+            comprovador = true;
+        }
+    }
+
+    if (!comprovador) {
+        System.out.println("No hi ha llibres d'aquesta categoria");
+    }
+    }    
+    ConsoleUtils.dormirSegons(2);
+
+}
+
     public boolean creadorLlibre(Scanner teclado) {
         ConsoleUtils.saltarPagina("--- CREACIÓ DE LLIBRE ---");
 
@@ -227,6 +270,9 @@ public class Biblioteca {
 
         System.out.print("Autor: ");
         String autor = teclado.nextLine();
+
+        System.out.print("Categoria: ");
+        String categoria = teclado.nextLine();
 
         if (titol.isEmpty()) {
             return false;
@@ -237,9 +283,9 @@ public class Biblioteca {
                 ConsoleUtils.dormirSegons(1.5);
                 return false;
             } else {
-                Llibre llibre = new Llibre(titol, autor);
+                Llibre llibre = new Llibre(titol, autor, categoria);
                 afegirLlibre(llibre);
-                System.out.println("Llibre " + titol + " de l'autor " + autor + " s'ha afegit");
+                System.out.println("Llibre " + titol + " de l'autor " + autor + " s'ha afegita amb la categoria " + llibre.getCategoria());
                 ConsoleUtils.dormirSegons(1.5);
                 return true;
             }
@@ -258,6 +304,9 @@ public class Biblioteca {
         System.out.print("Autor Nou: ");
         String autorNou = teclado.nextLine();
 
+        System.out.print("Categoria Nou: ");
+        String categoriaNou = teclado.nextLine();
+
         if (titolAntic.isEmpty() || titolNou.isEmpty()) {
             System.out.println("No s'ha trobat cap llibre amb aquest titol.");
             ConsoleUtils.dormirSegons(1.5);
@@ -269,7 +318,7 @@ public class Biblioteca {
 
                 llibre.setTitol(titolNou);
                 llibre.setAutor(autorNou);
-
+                llibre.setCategoria(categoriaNou);
                 System.out.println("Titol i autor canviats");
                 ConsoleUtils.dormirSegons(1.5);
 

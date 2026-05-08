@@ -59,8 +59,15 @@ public class Opcions {
         }
     }
 
-    // Hay que crear la categoria dentro del llibre
-    public void gestionarCategoria(Scanner teclado) {
+    public void gestionarCategoria(Scanner teclado, Biblioteca biblioteca) {
+
+        ConsoleUtils.saltarPagina("--- Categoríes ---");
+        System.out.println("Ficció, Novel·la, Història, Terror, Biografia, Altres");
+        System.out.println("Escriu la categoria que vols veure");
+        String categoria = teclado.nextLine();
+
+        biblioteca.mostrarCategoria(categoria);
+
 
     }
 
