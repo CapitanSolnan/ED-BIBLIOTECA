@@ -1,3 +1,4 @@
+package models;
 import java.util.ArrayList;
 import java.util.List;
 // usuari se crea con el nom
