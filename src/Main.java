@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 import menu.*;
 import models.*;
-import utils.*;
 
 public class Main {
     public static void main(String[] args) {
