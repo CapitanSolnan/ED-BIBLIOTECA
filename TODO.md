@@ -3,10 +3,6 @@
 ## Bugs
 
 ## Pendiente
-Main
-- [] Gestionar categories (ex. "Novel·la", "Història", "Ciència", etc.).
-- [] Gestionar estadístiquees (informes de llibres més prestats, lectors més actius, nombre total de préstecs per categoria...)
-
 
 
 ## Terminado
@@ -22,6 +18,10 @@ Prestec
 
 
 --- JAVI ---
+
+Main
+- [x] Gestionar categories (ex. "Novel·la", "Història", "Ciència", etc.).
+- [x] Gestionar estadístiquees (informes de llibres més prestats, lectors més actius, nombre total de préstecs per categoria...)
 
 Usuari
 - [x] Crear / Modificar / Eliminar usuari.
@@ -42,4 +42,4 @@ Biblioteca
 - [x] Buscar llibre a la biblioteca ignorant els accents.
 
 GestorBiblioteca
-- [] Controlar l’estoc (si tenim més d’un llibre).
+- [x] Controlar l’estoc (si tenim més d’un llibre).

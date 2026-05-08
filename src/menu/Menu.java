@@ -5,7 +5,7 @@ import models.*;
 import utils.*;
 
 public class Menu {
-    
+
     private final Biblioteca biblioteca;
     private final GestorBiblioteca gestor;
 
@@ -16,10 +16,7 @@ public class Menu {
 
     private final Opcions opcions = new Opcions();
 
-
-    
     public void menuPrincipal(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
-
         boolean activado = true;
         while (activado) {
             ConsoleUtils.saltarPagina("--Que vols fer?--");
@@ -27,7 +24,7 @@ public class Menu {
             System.out.println(" B. Menu Usuari");
             System.out.println(" C. Menu Consulta");
             System.out.println(" D. Menu Prèstec");
-            System.out.println(Colors.VERMELL+ " Q. SORTIR" + Colors.RESET);
+            System.out.println(Colors.VERMELL + " Q. SORTIR" + Colors.RESET);
 
             System.out.print(Estils.RESPOSTA);
             char opcio = teclado.next().toLowerCase().charAt(0);
@@ -36,7 +33,7 @@ public class Menu {
             switch (opcio) {
                 case 'a' -> menuLlibre(teclado, biblioteca);
                 case 'b' -> menuUsuari(teclado, biblioteca);
-                case 'c' -> menuConsulta(teclado, biblioteca);
+                case 'c' -> menuConsulta(teclado, biblioteca, gestor);
                 case 'd' -> menuGestor(teclado, biblioteca, gestor);
                 case 'q' -> activado = false;
                 default -> {
@@ -66,7 +63,6 @@ public class Menu {
                 case 'c' -> biblioteca.eliminacioUsuari(teclado);
                 case 'd' -> biblioteca.llistatUsuaris(teclado);
                 case 'e' -> biblioteca.cercarUsuari(teclado);
-
                 case 'q' -> activado = false;
                 default -> {
                     System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
@@ -91,7 +87,6 @@ public class Menu {
                 case 'a' -> biblioteca.creadorLlibre(teclado);
                 case 'b' -> biblioteca.modificacioLlibre(teclado);
                 case 'c' -> biblioteca.eliminacioLlibre(teclado);
-
                 case 'q' -> activado = false;
                 default -> {
                     System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
@@ -101,7 +96,7 @@ public class Menu {
         }
     }
 
-    public void menuConsulta(Scanner teclado, Biblioteca biblioteca) {
+    public void menuConsulta(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
         boolean activado = true;
         while (activado) {
             ConsoleUtils.saltarPagina("--Que vols fer?--");
@@ -117,7 +112,7 @@ public class Menu {
                 case 'a' -> opcions.consultarHistorial(teclado, biblioteca);
                 case 'b' -> opcions.disponibilitatLlibre(teclado, biblioteca);
                 case 'c' -> opcions.gestionarCategoria(teclado, biblioteca);
-                case 'd' -> opcions.gestionarEstadistiques(teclado);
+                case 'd' -> opcions.gestionarEstadistiques(teclado, biblioteca, gestor);
                 case 'q' -> activado = false;
                 default -> {
                     System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
@@ -125,7 +120,6 @@ public class Menu {
                 }
             }
         }
-
     }
 
     public void menuGestor(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
@@ -133,14 +127,16 @@ public class Menu {
         while (activado) {
             ConsoleUtils.saltarPagina("--Que vols fer?--");
             System.out.println("A. Prestar Llibre");
-            System.out.println("B. Control d'Estoc");
+            System.out.println("B. Retornar Llibre");
+            System.out.println("C. Control d'Estoc");
             System.out.println("Q. TORNAR");
 
             char opcio = teclado.next().toLowerCase().charAt(0);
             teclado.nextLine();
             switch (opcio) {
                 case 'a' -> menuPrestec(teclado, biblioteca, gestor);
-                case 'b' -> menuStoc(teclado, biblioteca);
+                case 'b' -> menuRetorn(teclado, biblioteca, gestor);
+                case 'c' -> menuStoc(teclado, biblioteca);
                 case 'q' -> activado = false;
                 default -> {
                     System.out.println(Colors.VERMELL + "Opcio erronia" + Colors.RESET);
@@ -148,18 +144,62 @@ public class Menu {
                 }
             }
         }
-       
-    }
-    /*------------------------------------------------------------ */
-
-
-    public void menuStoc(Scanner teclado, Biblioteca biblioteca){
-        //TODO: ESTO Controlar l’estoc (si tenim més d’un llibre).
     }
 
-    public void menuPrestec(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor){
-         ConsoleUtils.saltarPagina("--- MENU PRÈSTEC ---");
-        System.out.println(Estils.PREGUNTA + "Quin usuari vol fer el prèstec?" +Colors.RESET);
+    public void menuStoc(Scanner teclado, Biblioteca biblioteca) {
+        ConsoleUtils.saltarPagina("--- CONTROL D'ESTOC ---");
+
+        boolean hiHaLlibres = false;
+        for (Llibre llibre : biblioteca.getLlibres()) {
+            String estat;
+            if (llibre.getStock() == 0) {
+                estat = Colors.VERMELL + "ESGOTAT" + Colors.RESET;
+            } else if (llibre.getStock() <= 2) {
+                estat = Colors.GROC + "BAIX (" + llibre.getStock() + " uds)" + Colors.RESET;
+            } else {
+                estat = Colors.VERD + "OK (" + llibre.getStock() + " uds)" + Colors.RESET;
+            }
+            System.out.println(" " + llibre.getTitol() + " — " + estat);
+            hiHaLlibres = true;
+        }
+
+        if (!hiHaLlibres) {
+            System.out.println(Colors.GRIS + "No hi ha llibres registrats." + Colors.RESET);
+        }
+
+        System.out.println();
+        System.out.println(Colors.GRIS + "Prem ENTER per TORNAR" + Colors.RESET);
+        teclado.nextLine();
+    }
+
+    public void menuRetorn(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
+        ConsoleUtils.saltarPagina("--- RETORN DE LLIBRE ---");
+        System.out.println(Estils.PREGUNTA + "Quin usuari retorna el llibre?" + Colors.RESET);
+        String nom = teclado.nextLine();
+
+        System.out.println(Estils.PREGUNTA + "Quin llibre retorna?" + Colors.RESET);
+        String titol = teclado.nextLine();
+
+        if (nom.isEmpty() || titol.isEmpty()) {
+            System.out.println(Colors.VERMELL + "Usuari o titol incorrecte" + Colors.RESET);
+            ConsoleUtils.dormirSegons(1.5);
+            return;
+        }
+
+        Usuari usuari = biblioteca.buscarUsuari(nom);
+        Llibre llibre = biblioteca.buscarLlibre(titol);
+
+        if (usuari == null || llibre == null) {
+            System.out.println(Colors.VERMELL + "Usuari o titol no trobat" + Colors.RESET);
+        } else {
+            gestor.retornarLlibre(usuari, llibre);
+        }
+        ConsoleUtils.dormirSegons(1.5);
+    }
+
+    public void menuPrestec(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
+        ConsoleUtils.saltarPagina("--- MENU PRÈSTEC ---");
+        System.out.println(Estils.PREGUNTA + "Quin usuari vol fer el prèstec?" + Colors.RESET);
         String nom = teclado.nextLine();
 
         System.out.println(Estils.PREGUNTA + "Quin llibre es?" + Colors.RESET);
@@ -173,16 +213,13 @@ public class Menu {
             Llibre llibre = biblioteca.buscarLlibre(titol);
 
             if (usuari != null && llibre != null) {
-
                 gestor.prestarLlibre(usuari, llibre);
                 System.out.println(Colors.VERD + "L'usuari " + nom + " te en prèstec el llibre " + titol + Colors.RESET);
                 ConsoleUtils.dormirSegons(1.5);
-
             } else {
-                System.out.println(Colors.VERMELL + "Usuari o titol incorrecte" +Colors.RESET);
+                System.out.println(Colors.VERMELL + "Usuari o titol incorrecte" + Colors.RESET);
                 ConsoleUtils.dormirSegons(1.5);
             }
-
         }
     }
 }

@@ -1,5 +1,6 @@
 package menu;
 
+import java.util.Map;
 import java.util.Scanner;
 
 import models.*;
@@ -71,7 +72,56 @@ public class Opcions {
 
     }
 
-    public void gestionarEstadistiques(Scanner teclado) {
+    public void gestionarEstadistiques(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
+    ConsoleUtils.saltarPagina("--- ESTADÍSTIQUES ---");
 
+    // Llibres més prestats
+    System.out.println(Estils.NEGRETA + "Llibres més prestats:" + Colors.RESET);
+    var llibresMesPrestats = gestor.getLlibresMesPrestats();
+    if (llibresMesPrestats.isEmpty()) {
+        System.out.println(Colors.GRIS + "Cap préstec registrat." + Colors.RESET);
+    } else {
+        int pos = 1;
+        for (var entry : llibresMesPrestats) {
+            System.out.println("  " + pos++ + ". " + entry.getKey() + 
+                               Colors.GROC + " (" + entry.getValue() + " vegades)" + Colors.RESET);
+        }
     }
+
+    System.out.println();
+
+    // Lectors més actius
+    System.out.println(Estils.NEGRETA + "Lectors més actius:" + Colors.RESET);
+    var lectorsMesActius = gestor.getLectorsMesActius();
+    if (lectorsMesActius.isEmpty()) {
+        System.out.println(Colors.GRIS + "Cap préstec registrat." + Colors.RESET);
+    } else {
+        int pos = 1;
+        for (var entry : lectorsMesActius) {
+            System.out.println("  " + pos++ + ". " + entry.getKey() + 
+                               Colors.GROC + " (" + entry.getValue() + " préstecs)" + Colors.RESET);
+        }
+    }
+
+    System.out.println();
+
+    // Préstecs per categoria
+    System.out.println(Estils.NEGRETA + "Préstecs per categoria:" + Colors.RESET);
+    var perCategoria = gestor.getPrestecPerCategoria();
+    if (perCategoria.isEmpty()) {
+        System.out.println(Colors.GRIS + "Cap préstec registrat." + Colors.RESET);
+    } else {
+        perCategoria.entrySet().stream()
+            .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+            .forEach(e -> System.out.println("  • " + e.getKey() + 
+                                             Colors.GROC + ": " + e.getValue() + Colors.RESET));
+    }
+
+    System.out.println();
+    System.out.println(Colors.GRIS + "Total de préstecs: " + Colors.BLANC + 
+                       gestor.getTotalPrestecs() + Colors.RESET);
+    System.out.println();
+    System.out.println(Colors.GRIS + "Prem ENTER per TORNAR" + Colors.RESET);
+    teclado.nextLine();
+}
 }
