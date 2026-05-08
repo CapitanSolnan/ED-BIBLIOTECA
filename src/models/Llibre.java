@@ -1,3 +1,4 @@
+package models;
 import utils.Colors;
 
 public class Llibre {

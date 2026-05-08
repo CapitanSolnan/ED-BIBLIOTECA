@@ -1,3 +1,4 @@
+package models;
 import java.time.LocalDate;
 
 //prestec se crea con usuari, llibre y la data del prestec

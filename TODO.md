@@ -33,8 +33,7 @@ Usuari
 - [x] Cercar usuaris.
 
 Biblioteca
-- [x] Afegir llibre a la biblioteca.
-- [x] Buscar llibre a la biblioteca.
+- [x] Afegir / Buscar llibre a la biblioteca.
 - [x] Llistar llibres.
 
 GestorBiblioteca
