@@ -116,7 +116,7 @@ public class Menu {
             switch (opcio) {
                 case 'a' -> opcions.consultarHistorial(teclado, biblioteca);
                 case 'b' -> opcions.disponibilitatLlibre(teclado, biblioteca);
-                case 'c' -> opcions.gestionarCategoria(teclado);
+                case 'c' -> opcions.gestionarCategoria(teclado, biblioteca);
                 case 'd' -> opcions.gestionarEstadistiques(teclado);
                 case 'q' -> activado = false;
                 default -> {
