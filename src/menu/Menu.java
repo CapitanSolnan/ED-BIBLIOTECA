@@ -2,7 +2,7 @@ package menu;
 import java.util.Scanner;
 
 import models.*;
-import utils.*
+import utils.*;
 
 public class Menu {
     
