@@ -7,11 +7,7 @@ Main
 - [] Gestionar categories (ex. "Novel·la", "Història", "Ciència", etc.).
 - [] Gestionar estadístiquees (informes de llibres més prestats, lectors més actius, nombre total de préstecs per categoria...)
 
-Biblioteca
-- [] Buscar llibre a la biblioteca ignorant els accents.
 
-GestorBiblioteca
-- [] Controlar l’estoc (si tenim més d’un llibre).
 
 ## Terminado
 
@@ -42,3 +38,8 @@ GestorBiblioteca
 
 
 --- ALE ---
+Biblioteca
+- [x] Buscar llibre a la biblioteca ignorant els accents.
+
+GestorBiblioteca
+- [] Controlar l’estoc (si tenim més d’un llibre).

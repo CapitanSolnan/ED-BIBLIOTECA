@@ -2,7 +2,6 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import utils.ConsoleUtils;
 
 public class Biblioteca {
@@ -179,12 +178,22 @@ public class Biblioteca {
     }
 
     public Llibre buscarLlibre(String titol) {
+    String titolNet = treureAccentTitol(titol);
         for (Llibre llibre : llibres) {
-            if (llibre.getTitol().equalsIgnoreCase(titol)) {
+            if (treureAccentTitol(llibre.getTitol()).equalsIgnoreCase(titolNet)) {
                 return llibre;
             }
         }
         return null;
+    }
+
+    private String treureAccentTitol(String text){
+        return text.toLowerCase().replace("á" , "a").replace("à","a" )
+                                .replace("é", "e").replace("è", "e")
+                                .replace("í", "i").replace("ï", "i")
+                                .replace("ó", "o").replace("ò", "o")
+                                .replace("ú", "u").replace("ü", "u")
+                                .replace("ç", "c");
     }
 
     public List<Llibre> getLlibres() {
@@ -273,6 +282,9 @@ public void mostrarCategoria(String categoria) {
 
         System.out.print("Categoria: ");
         String categoria = teclado.nextLine();
+        
+        System.out.print("Stock: ");
+        int stock = teclado.nextInt();
 
         if (titol.isEmpty()) {
             return false;
@@ -283,7 +295,7 @@ public void mostrarCategoria(String categoria) {
                 ConsoleUtils.dormirSegons(1.5);
                 return false;
             } else {
-                Llibre llibre = new Llibre(titol, autor, categoria);
+                Llibre llibre = new Llibre(titol, autor, categoria, stock);
                 afegirLlibre(llibre);
                 System.out.println("Llibre " + titol + " de l'autor " + autor + " s'ha afegita amb la categoria " + llibre.getCategoria());
                 ConsoleUtils.dormirSegons(1.5);
@@ -307,6 +319,9 @@ public void mostrarCategoria(String categoria) {
         System.out.print("Categoria Nou: ");
         String categoriaNou = teclado.nextLine();
 
+        System.out.print("Stock: ");
+        int stockNou = teclado.nextInt();
+
         if (titolAntic.isEmpty() || titolNou.isEmpty()) {
             System.out.println("No s'ha trobat cap llibre amb aquest titol.");
             ConsoleUtils.dormirSegons(1.5);
@@ -319,6 +334,7 @@ public void mostrarCategoria(String categoria) {
                 llibre.setTitol(titolNou);
                 llibre.setAutor(autorNou);
                 llibre.setCategoria(categoriaNou);
+                llibre.setStock(stockNou);
                 System.out.println("Titol i autor canviats");
                 ConsoleUtils.dormirSegons(1.5);
 

@@ -6,12 +6,14 @@ public class Llibre {
     private String autor;
     private String categoria;
     private boolean prestat;
+    private int stock;
 
-    public Llibre(String titol, String autor, String categoria) {
+    public Llibre(String titol, String autor, String categoria, int stock) {
         this.titol = titol;
         this.autor = autor;
         this.categoria = comprovarCategoria(categoria);
         this.prestat = false;
+        this.stock = stock;
     }
 
     public String comprovarCategoria(String categoria) {
@@ -33,7 +35,27 @@ public class Llibre {
         }
 
     }
+// Mètodes per gestionar l'estoc
+    public boolean hiHaEstoc() {
+        return stock > 0;
+    }
+    public void retornar() {
+        this.stock++;
+    }
+ 
+    public void prestar() { 
+        if(hiHaEstoc()){
+            this.stock--;
+        }else{
+            System.out.println("no hi ha stock");
+        }
+        
+    }
 
+    public int getStock() {
+        return stock;
+    }
+   
     public String getCategoria() {
         return categoria;
     }
@@ -49,14 +71,15 @@ public class Llibre {
         return autor; 
     }
     public boolean esPrestat() { 
-        return prestat; 
+        if(!hiHaEstoc()){
+            return true;
+        }else{
+            
+            return false; 
+        }
     }
-    public void prestar() { 
-        prestat = true; 
-    }
-    public void retornar() { 
-        prestat = false; 
-    }
+
+  
 
     public void setTitol(String titol) {
         this.titol = titol;
@@ -66,11 +89,18 @@ public class Llibre {
         this.autor = autor;
     }
 
+    public void setStock(int stock){
+        this.stock = stock;
+    }
 
     
     @Override
     //toString retorna el titulo, el autor y luego si prestat es true dice en presetec y en false disponible
     public String toString() {
-        return titol + " de " + autor + (prestat ? Colors.GROC+" (En préstec)" + Colors.RESET : Colors.VERD +" (Disponible)" + Colors.RESET);
+        String infoEstoc = (stock > 0) 
+        ? Colors.VERD + " (Disponible: " + stock + " uds)" + Colors.RESET 
+        : Colors.VERMELL + " (Esgotat) " + Colors.RESET;
+
+        return titol + " de " + autor + (prestat ? Colors.GROC+" (En préstec)" + Colors.RESET : Colors.VERD + infoEstoc + Colors.RESET);
     }
 }
