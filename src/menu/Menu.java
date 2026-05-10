@@ -1,14 +1,26 @@
 package menu;
+
 import java.util.Scanner;
 
 import models.*;
 import utils.*;
 
+/**
+ * Classe encarregada de gestionar tots els menús del sistema de biblioteca.
+ * Permet navegar entre les opcions de gestió de llibres, usuaris, consultes,
+ * préstecs i control d'estoc.
+ */
 public class Menu {
 
     private final Biblioteca biblioteca;
     private final GestorBiblioteca gestor;
 
+    /**
+     * Constructor del menú principal.
+     *
+     * @param biblioteca instància de la biblioteca
+     * @param gestor gestor encarregat dels préstecs i retorns
+     */
     public Menu(Biblioteca biblioteca, GestorBiblioteca gestor) {
         this.biblioteca = biblioteca;
         this.gestor = gestor;
@@ -16,6 +28,14 @@ public class Menu {
 
     private final Opcions opcions = new Opcions();
 
+    /**
+     * Mostra el menú principal i permet accedir als submenús de llibre,
+     * usuari, consultes i préstecs.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     * @param gestor instància del gestor de biblioteca
+     */
     public void menuPrincipal(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
         boolean activado = true;
         while (activado) {
@@ -44,6 +64,13 @@ public class Menu {
         }
     }
 
+    /**
+     * Menú dedicat a la gestió d'usuaris: creació, modificació, eliminació,
+     * llistat i cerca.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     */
     public void menuUsuari(Scanner teclado, Biblioteca biblioteca) {
         boolean activado = true;
         while (activado) {
@@ -72,6 +99,12 @@ public class Menu {
         }
     }
 
+    /**
+     * Menú dedicat a la gestió de llibres: creació, modificació i eliminació.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     */
     public void menuLlibre(Scanner teclado, Biblioteca biblioteca) {
         boolean activado = true;
         while (activado) {
@@ -96,6 +129,14 @@ public class Menu {
         }
     }
 
+    /**
+     * Menú de consultes generals: historial, disponibilitat, categories
+     * i estadístiques.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     * @param gestor instància del gestor de biblioteca
+     */
     public void menuConsulta(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
         boolean activado = true;
         while (activado) {
@@ -122,6 +163,13 @@ public class Menu {
         }
     }
 
+    /**
+     * Menú de gestió de préstecs: prestar llibres, retornar-los i consultar l'estoc.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     * @param gestor instància del gestor de biblioteca
+     */
     public void menuGestor(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
         boolean activado = true;
         while (activado) {
@@ -146,6 +194,12 @@ public class Menu {
         }
     }
 
+    /**
+     * Mostra l'estat de l'estoc de tots els llibres registrats.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     */
     public void menuStoc(Scanner teclado, Biblioteca biblioteca) {
         ConsoleUtils.saltarPagina("--- CONTROL D'ESTOC ---");
 
@@ -172,6 +226,13 @@ public class Menu {
         teclado.nextLine();
     }
 
+    /**
+     * Menú per gestionar el retorn d'un llibre per part d'un usuari.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     * @param gestor instància del gestor de biblioteca
+     */
     public void menuRetorn(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
         ConsoleUtils.saltarPagina("--- RETORN DE LLIBRE ---");
         System.out.println(Estils.PREGUNTA + "Quin usuari retorna el llibre?" + Colors.RESET);
@@ -197,6 +258,14 @@ public class Menu {
         ConsoleUtils.dormirSegons(1.5);
     }
 
+    /**
+     * Menú per gestionar un préstec: demana l'usuari i el llibre i
+     * executa l'operació si és possible.
+     *
+     * @param teclado Scanner per llegir l'entrada de l'usuari
+     * @param biblioteca instància de la biblioteca
+     * @param gestor instància del gestor de biblioteca
+     */
     public void menuPrestec(Scanner teclado, Biblioteca biblioteca, GestorBiblioteca gestor) {
         ConsoleUtils.saltarPagina("--- MENU PRÈSTEC ---");
         System.out.println(Estils.PREGUNTA + "Quin usuari vol fer el prèstec?" + Colors.RESET);

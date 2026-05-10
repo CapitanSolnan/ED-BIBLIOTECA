@@ -1,26 +1,44 @@
 package models;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import utils.ConsoleUtils;
 
+/**
+ * Classe que representa una biblioteca. Gestiona llistes de llibres i usuaris,
+ * i proporciona funcionalitats per afegir, modificar, eliminar i consultar-los.
+ */
 public class Biblioteca {
+
     private List<Llibre> llibres;
     private List<Usuari> usuaris;
 
+    /**
+     * Constructor que inicialitza les llistes de llibres i usuaris.
+     */
     public Biblioteca() {
         this.llibres = new ArrayList<>();
         this.usuaris = new ArrayList<>();
-
     }
 
+    /* ---------------------- FUNCIONS USUARI ---------------------- */
 
-    /*FUNCIONES USUARI------------------------------------------------------ */
-
+    /**
+     * Afegeix un usuari a la biblioteca.
+     *
+     * @param usuari usuari a afegir
+     */
     public void afegirUsuari(Usuari usuari) {
         usuaris.add(usuari);
     }
 
+    /**
+     * Busca un usuari pel seu nom.
+     *
+     * @param nom nom de l'usuari a buscar
+     * @return l'usuari si existeix, o null si no es troba
+     */
     public Usuari buscarUsuari(String nom) {
         for (Usuari usuari : usuaris) {
             if (usuari.getNom().equalsIgnoreCase(nom)) {
@@ -30,10 +48,21 @@ public class Biblioteca {
         return null;
     }
 
+    /**
+     * Retorna la llista d'usuaris registrats.
+     *
+     * @return llista d'usuaris
+     */
     public List<Usuari> getUsuaris() {
         return usuaris;
     }
 
+    /**
+     * Crea un nou usuari demanant les dades per teclat.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si s'ha creat correctament, false si hi ha errors
+     */
     public boolean creadorUsuari(Scanner teclado) {
 
         ConsoleUtils.saltarPagina("--- CREACIÓ DE USUARI ---");
@@ -62,6 +91,12 @@ public class Biblioteca {
 
     }
 
+    /**
+     * Modifica el nom d'un usuari existent.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si s'ha modificat, false si no existeix
+     */
     public boolean modificacioUsuari(Scanner teclado) {
         ConsoleUtils.saltarPagina("--- MODIFICAR USUARI ---");
 
@@ -95,6 +130,12 @@ public class Biblioteca {
 
     }
 
+    /**
+     * Elimina un usuari existent.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si s'ha eliminat, false si no existeix
+     */
     public boolean eliminacioUsuari(Scanner teclado) {
         ConsoleUtils.saltarPagina("--- ELIMINAR USUARI ---");
 
@@ -125,6 +166,11 @@ public class Biblioteca {
 
     }
 
+    /**
+     * Mostra un llistat de tots els usuaris registrats.
+     *
+     * @param teclado Scanner per esperar l'ENTER final
+     */
     public void llistatUsuaris(Scanner teclado){
         boolean comprovador = true;
         ConsoleUtils.saltarPagina("--- Llistat d'Usuaris ---");
@@ -140,8 +186,14 @@ public class Biblioteca {
         System.out.println("Prem ENTER per TORNAR");
         teclado.nextLine();
         
-}
+    }
 
+    /**
+     * Cerca un usuari pel seu nom i mostra si existeix.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si existeix, false si no
+     */
     public boolean cercarUsuari(Scanner teclado){
         ConsoleUtils.saltarPagina("--- Cercador d'Usuari ---");
         System.out.print("Nom : ");
@@ -168,17 +220,27 @@ public class Biblioteca {
 
         }
 
-
     }
 
-    /*FUNCIONES LIBRO------------------------------------------------------ */
+    /* ---------------------- FUNCIONS LLIBRE ---------------------- */
 
+    /**
+     * Afegeix un llibre a la biblioteca.
+     *
+     * @param llibre llibre a afegir
+     */
     public void afegirLlibre(Llibre llibre) {
         llibres.add(llibre);
     }
 
+    /**
+     * Busca un llibre pel seu títol, ignorant accents.
+     *
+     * @param titol títol del llibre
+     * @return el llibre si existeix, o null si no es troba
+     */
     public Llibre buscarLlibre(String titol) {
-    String titolNet = treureAccentTitol(titol);
+        String titolNet = treureAccentTitol(titol);
         for (Llibre llibre : llibres) {
             if (treureAccentTitol(llibre.getTitol()).equalsIgnoreCase(titolNet)) {
                 return llibre;
@@ -187,6 +249,12 @@ public class Biblioteca {
         return null;
     }
 
+    /**
+     * Elimina accents d'un text per facilitar la comparació.
+     *
+     * @param text text original
+     * @return text sense accents
+     */
     private String treureAccentTitol(String text){
         return text.toLowerCase().replace("á" , "a").replace("à","a" )
                                 .replace("é", "e").replace("è", "e")
@@ -196,81 +264,93 @@ public class Biblioteca {
                                 .replace("ç", "c");
     }
 
+    /**
+     * Retorna la llista de llibres registrats.
+     *
+     * @return llista de llibres
+     */
     public List<Llibre> getLlibres() {
         return llibres;
     }
 
+    /**
+     * Mostra els llibres disponibles i els prestats.
+     */
     public void mostrarDisponibilitat() {
-    boolean disponoble = false;
-    boolean prestat = false;
+        boolean disponoble = false;
+        boolean prestat = false;
 
-    System.out.println("--- Llibres Disponibles ---");
-    for (Llibre llibre : llibres) {
-        if (!llibre.esPrestat()) {
-            System.out.println(llibre);
-            disponoble = true;
-        }
-    }
-    if (!disponoble) {
-        System.out.println("No hi ha llibres disponibles");
-    }
-    System.out.println();
-    System.out.println("--- Llibres Prestats ---");
-    for (Llibre llibre : llibres) {
-        if (llibre.esPrestat()) {
-            System.out.println(llibre);
-            prestat = true;
-        }
-    }
-    if (!prestat) {
-        System.out.println("No hi ha llibres prestats");
-    }
-    
-}
-
-
-public void mostrarCategoria(String categoria) {
-
-
-    if (categoria.equals("todas")) {
-        
-        boolean comprovador = false;
-
-        ConsoleUtils.saltarPagina("--- Totes les categories ---");
+        System.out.println("--- Llibres Disponibles ---");
         for (Llibre llibre : llibres) {
-            System.out.println(" Categoria: " + llibre.getCategoria() + " ------>  " + llibre);
-            comprovador = true;
+            if (!llibre.esPrestat()) {
+                System.out.println(llibre);
+                disponoble = true;
+            }
         }
-
-
-        if (!comprovador) {
-            System.out.println("No hi ha llibres"); 
-
+        if (!disponoble) {
+            System.out.println("No hi ha llibres disponibles");
         }
-
-
-    }else{
-        
-
-    boolean comprovador = false;
-
-    ConsoleUtils.saltarPagina("--- Llibres de la categoria " + categoria + " ---");
-    for (Llibre llibre : llibres) {
-
-        if (llibre.getCategoria().equalsIgnoreCase(categoria)) {
-            System.out.println(llibre);
-            comprovador = true;
+        System.out.println();
+        System.out.println("--- Llibres Prestats ---");
+        for (Llibre llibre : llibres) {
+            if (llibre.esPrestat()) {
+                System.out.println(llibre);
+                prestat = true;
+            }
+        }
+        if (!prestat) {
+            System.out.println("No hi ha llibres prestats");
         }
     }
 
-    if (!comprovador) {
-        System.out.println("No hi ha llibres d'aquesta categoria");
+    /**
+     * Mostra els llibres d'una categoria concreta o totes les categories.
+     *
+     * @param categoria categoria a consultar
+     */
+    public void mostrarCategoria(String categoria) {
+
+        if (categoria.equals("todas")) {
+            
+            boolean comprovador = false;
+
+            ConsoleUtils.saltarPagina("--- Totes les categories ---");
+            for (Llibre llibre : llibres) {
+                System.out.println(" Categoria: " + llibre.getCategoria() + " ------>  " + llibre);
+                comprovador = true;
+            }
+
+            if (!comprovador) {
+                System.out.println("No hi ha llibres"); 
+            }
+
+        } else {
+
+            boolean comprovador = false;
+
+            ConsoleUtils.saltarPagina("--- Llibres de la categoria " + categoria + " ---");
+            for (Llibre llibre : llibres) {
+
+                if (llibre.getCategoria().equalsIgnoreCase(categoria)) {
+                    System.out.println(llibre);
+                    comprovador = true;
+                }
+            }
+
+            if (!comprovador) {
+                System.out.println("No hi ha llibres d'aquesta categoria");
+            }
+        }
+        ConsoleUtils.dormirSegons(2);
+
     }
-    }    
-    ConsoleUtils.dormirSegons(2);
 
-}
-
+    /**
+     * Crea un llibre nou demanant les dades per teclat.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si s'ha creat correctament, false si ja existeix o hi ha errors
+     */
     public boolean creadorLlibre(Scanner teclado) {
         ConsoleUtils.saltarPagina("--- CREACIÓ DE LLIBRE ---");
 
@@ -305,9 +385,15 @@ public void mostrarCategoria(String categoria) {
 
     }
 
+    /**
+     * Modifica les dades d'un llibre existent.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si s'ha modificat, false si no existeix
+     */
     public boolean modificacioLlibre(Scanner teclado) {
-            ConsoleUtils.saltarPagina("--- MODIFICAR DE LLIBRE ---");
-            System.out.print("Titol Antic: ");
+        ConsoleUtils.saltarPagina("--- MODIFICAR DE LLIBRE ---");
+        System.out.print("Titol Antic: ");
         String titolAntic = teclado.nextLine();
 
         System.out.print("Titol Nou: ");
@@ -350,6 +436,12 @@ public void mostrarCategoria(String categoria) {
 
     }
 
+    /**
+     * Elimina un llibre existent.
+     *
+     * @param teclado Scanner per llegir l'entrada
+     * @return true si s'ha eliminat, false si no existeix
+     */
     public boolean eliminacioLlibre(Scanner teclado) {
         ConsoleUtils.saltarPagina("--- ELIMINAR DE LLIBRE ---");
 
@@ -357,7 +449,7 @@ public void mostrarCategoria(String categoria) {
         String titol = teclado.nextLine();
 
         if (titol.isEmpty()) {
-                System.out.println("No s'ha trobat cap llibre amb aquest titol.");
+            System.out.println("No s'ha trobat cap llibre amb aquest titol.");
             ConsoleUtils.dormirSegons(1.5);
             return false;
         } else {
@@ -379,7 +471,5 @@ public void mostrarCategoria(String categoria) {
         }
 
     }
-
-
 
 }
